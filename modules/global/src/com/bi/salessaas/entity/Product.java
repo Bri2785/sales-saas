@@ -1,6 +1,7 @@
 package com.bi.salessaas.entity;
 
 import com.haulmont.addon.sdbmt.entity.StandardTenantEntity;
+import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.chile.core.annotations.NumberFormat;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
@@ -34,15 +35,16 @@ public class Product extends StandardTenantEntity {
     protected Integer type;
 
     @NotNull
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @Column(name = "BASE_RETAIL", nullable = false)
     protected BigDecimal baseRetail;
 
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @NotNull
     @Column(name = "COST", nullable = false)
     protected BigDecimal cost;
 
+    @MetaProperty(datatype = "currency")
     @Column(name = "STORAGE_PRICE")
     protected BigDecimal storagePrice;
 

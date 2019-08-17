@@ -15,27 +15,31 @@
     <layout expand="scrollBox" spacing="true">
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="orderItemDc">
-                <column width="250px">
+                <column width="400px" childrenCaptionWidth="180px">
                     <pickerField id="productField" property="product">
                         <actions>
                             <action id="lookup" type="picker_lookup"/>
                         </actions>
                     </pickerField>
+                    <lookupField id="invoiceStatusField" property="invoicedStatus" caption="msg://itemInvoicedStatus"/>
+                    <label/>
                     <textField id="quantityField" property="quantity"/>
-                    <textField id="costField" property="cost"/>
+                    <label/>
+                    <textField id="costField" property="cost" />
                     <textField id="retailField" property="retail"/>
-                    <textField id="totalPriceField" property="totalPrice"/>
+                    <textField id="totalPriceField" property="totalPrice" editable="false"/>
                     <textField id="installChargeField" property="installCharge"/>
                     <textField id="removalChargeField" property="removalCharge"/>
                     <textField id="installMHField" property="installMH"/>
                     <textField id="removalMHField" property="removalMH"/>
                     <textField id="storageField" property="storage"/>
                     <textField id="notesField" property="notes"/>
-                    <checkBox id="useMHForCalcField" property="useMHForCalc"/>
+                    <checkBox id="useMHForCalcField" property="useMHForCalc" caption="msg://useMHforCalc"/>
                     <checkBox id="isOnWorkOrderField" property="isOnWorkOrder"/>
                     <checkBox id="isOnInvoiceField" property="isOnInvoice"/>
                     <lookupField id="statusField" property="status"/>
                     <checkBox id="taxableField" property="taxable"/>
+
                 </column>
             </form>
         </scrollBox>

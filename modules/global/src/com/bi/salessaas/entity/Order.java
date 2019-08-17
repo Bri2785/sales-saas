@@ -2,6 +2,7 @@ package com.bi.salessaas.entity;
 
 import com.haulmont.addon.sdbmt.entity.StandardTenantEntity;
 import com.haulmont.chile.core.annotations.Composition;
+import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.chile.core.annotations.NumberFormat;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
@@ -26,12 +27,14 @@ public class Order extends StandardTenantEntity {
     @JoinColumn(name = "CUSTOMER_ID")
     protected Customer customer;
 
+    @NotNull
     @Lookup(type = LookupType.DROPDOWN)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TYPE_ID")
     protected JobType jobType;
 
-    @Column(name = "ORDER_TYPE")
+    @NotNull
+    @Column(name = "ORDER_TYPE", nullable = false)
     protected Integer orderType;
 
     @Lookup(type = LookupType.DROPDOWN)
@@ -47,22 +50,31 @@ public class Order extends StandardTenantEntity {
 
     @NumberFormat(pattern = "#%")
     @Column(name = "SHIPPING_RATE")
-    protected Double shippingRate;
+    protected BigDecimal shippingRate = new BigDecimal(.14);
+
+    @MetaProperty(datatype = "currency")
+    @Column(name = "SHIPPING_AMOUNT")
+    protected BigDecimal shippingAmount = BigDecimal.ZERO;
 
     @Column(name = "IS_DISCOUNTED")
-    protected Boolean isDiscounted;
-
-    @Column(name = "IS_INSTALL_TAXABLE")
-    protected Boolean isInstallTaxable;
-
-    @Column(name = "IS_REMOVAL_TAXABLE")
-    protected Boolean isRemovalTaxable;
-
-    @Column(name = "IS_STORAGE_TAXABLE")
-    protected Boolean isStorageTaxable;
+    protected Boolean isDiscounted = false;
 
     @Column(name = "DISCOUNT")
-    protected BigDecimal discount;
+    @MetaProperty(datatype = "currency")
+    protected BigDecimal discount = BigDecimal.ZERO;
+
+    @NumberFormat(pattern = "#.#%")
+    @Column(name = "DISCOUNT_PERCENT")
+    protected BigDecimal discountPercent = BigDecimal.ZERO;
+
+    @Column(name = "IS_INSTALL_TAXABLE")
+    protected Boolean isInstallTaxable = true;
+
+    @Column(name = "IS_REMOVAL_TAXABLE")
+    protected Boolean isRemovalTaxable = true;
+
+    @Column(name = "IS_STORAGE_TAXABLE")
+    protected Boolean isStorageTaxable = true;
 
     @Column(name = "NOTES", length = 1000)
     protected String notes;
@@ -92,22 +104,37 @@ public class Order extends StandardTenantEntity {
     protected LocalDateTime removalDate;
 
     @Column(name = "USE_REMOVAL_PERCENT")
-    protected Boolean useRemovalPercent;
+    protected Boolean useRemovalPercent = true;
 
+    @MetaProperty(datatype = "currency")
+    @Column(name = "TOTAL_PRODUCT")
+    protected BigDecimal totalProduct = BigDecimal.ZERO;
+
+    @MetaProperty(datatype = "currency")
     @Column(name = "TOTAL_STORAGE")
-    protected BigDecimal totalStorage;
+    protected BigDecimal totalStorage = BigDecimal.ZERO;
 
+    @MetaProperty(datatype = "currency")
     @Column(name = "TOTAL_INSTALL")
-    protected BigDecimal totalInstall;
+    protected BigDecimal totalInstall = BigDecimal.ZERO;
 
+    @MetaProperty(datatype = "currency")
     @Column(name = "TOTAL_REMOVAL")
-    protected BigDecimal totalRemoval;
+    protected BigDecimal totalRemoval = BigDecimal.ZERO;
+
+    @MetaProperty(datatype = "currency")
+    @Column(name = "TOTAL_TAX")
+    protected BigDecimal totalTax;
+
+    @MetaProperty(datatype = "currency")
+    @Column(name = "GRAND_TOTAL")
+    protected BigDecimal grandTotal = BigDecimal.ZERO;
 
     @Column(name = "IS_INSTALLED")
-    protected Boolean isInstalled;
+    protected Boolean isInstalled = false;
 
     @Column(name = "IS_REMOVED")
-    protected Boolean isRemoved;
+    protected Boolean isRemoved = false;
 
     @Lookup(type = LookupType.DROPDOWN)
     @ManyToOne(fetch = FetchType.LAZY)
@@ -118,18 +145,66 @@ public class Order extends StandardTenantEntity {
     protected String poNumber;
 
     @Column(name = "OVERRIDE_STORAGE")
-    protected Boolean overrideStorage;
+    protected Boolean overrideStorage = false;
 
     @Column(name = "OVERRIDE_INSTALL")
-    protected Boolean overrideInstall;
+    protected Boolean overrideInstall = false;
 
     @Column(name = "OVERRIDE_REMOVAL")
-    protected Boolean overrideRemoval;
+    protected Boolean overrideRemoval = false;
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "order")
     protected List<OrderItem> items;
+
+    public void setShippingRate(BigDecimal shippingRate) {
+        this.shippingRate = shippingRate;
+    }
+
+    public BigDecimal getShippingRate() {
+        return shippingRate;
+    }
+
+    public void setDiscountPercent(BigDecimal discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
+    public BigDecimal getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public BigDecimal getShippingAmount() {
+        return shippingAmount;
+    }
+
+    public void setShippingAmount(BigDecimal shippingAmount) {
+        this.shippingAmount = shippingAmount;
+    }
+
+    public BigDecimal getTotalTax() {
+        return totalTax;
+    }
+
+    public void setTotalTax(BigDecimal totalTax) {
+        this.totalTax = totalTax;
+    }
+
+    public BigDecimal getTotalProduct() {
+        return totalProduct;
+    }
+
+    public void setTotalProduct(BigDecimal totalProduct) {
+        this.totalProduct = totalProduct;
+    }
+
+    public BigDecimal getGrandTotal() {
+        return grandTotal;
+    }
+
+    public void setGrandTotal(BigDecimal grandTotal) {
+        this.grandTotal = grandTotal;
+    }
 
     public Boolean getIsStorageTaxable() {
         return isStorageTaxable;
@@ -345,14 +420,6 @@ public class Order extends StandardTenantEntity {
 
     public void setDiscount(BigDecimal discount) {
         this.discount = discount;
-    }
-
-    public Double getShippingRate() {
-        return shippingRate;
-    }
-
-    public void setShippingRate(Double shippingRate) {
-        this.shippingRate = shippingRate;
     }
 
     public SalesPerson getSalesPerson() {

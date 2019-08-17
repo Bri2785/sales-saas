@@ -1,12 +1,14 @@
 package com.bi.salessaas.entity;
 
 import com.haulmont.addon.sdbmt.entity.StandardTenantEntity;
+import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.chile.core.annotations.NumberFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @NamePattern("%s|typeName")
@@ -15,14 +17,15 @@ import java.math.BigDecimal;
 public class JobType extends StandardTenantEntity {
     private static final long serialVersionUID = -3690802550425022147L;
 
-    @Column(name = "TYPE_NAME", unique = true)
+    @NotNull
+    @Column(name = "TYPE_NAME", nullable = false, unique = true)
     protected String typeName;
 
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @Column(name = "HOURLY_WAGE")
     protected BigDecimal hourlyWage;
 
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @Column(name = "LABOR_WAGE")
     protected BigDecimal laborWage;
 

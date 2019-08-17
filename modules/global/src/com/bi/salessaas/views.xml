@@ -8,6 +8,9 @@
     </view>
     <view entity="salessaas_Order" name="order-edit" extends="_local">
         <property name="customer" view="_minimal"/>
+        <property name="jobType" view="_minimal"/>
+        <property name="season" view="_minimal"/>
+        <property name="salesPerson" view="_minimal"/>
         <property name="items" view="orderItem-with-product"/>
     </view>
     <view entity="salessaas_Product" name="product-view-with-category" extends="_local">

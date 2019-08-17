@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Table(name = "SALESSAAS_CUSTOMER")
@@ -66,21 +67,26 @@ public class Customer extends StandardTenantEntity {
     @Column(name = "JOB_ZIP")
     protected String jobZip;
 
+    @Pattern(message = "{msg://InvalidPhone}", regexp = "(?:\\d{3}-?){2}\\d{4}")
     @Column(name = "HOME_PHONE")
     protected String homePhone;
 
+    @Pattern(message = "{msg://InvalidPhone}", regexp = "(?:\\d{3}-?){2}\\d{4}")
     @Column(name = "WORK_PHONE")
     protected String workPhone;
 
+    @Pattern(message = "{msg://InvalidPhone}", regexp = "(?:\\d{3}-?){2}\\d{4}")
     @Column(name = "CELL_PHONE")
     protected String cellPhone;
 
+    @Email(message = "{msg://InvalidPhone}", regexp = "(?:\\d{3}-?){2}\\d{4}")
     @Column(name = "FAX")
     protected String fax;
 
     @Column(name = "CONTACT")
     protected String contact;
 
+    @Pattern(message = "{msg://InvalidPhone}", regexp = "(?:\\d{3}-?){2}\\d{4}")
     @Column(name = "CONTACT_PHONE")
     protected String contactPhone;
 

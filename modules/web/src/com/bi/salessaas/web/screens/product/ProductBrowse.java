@@ -8,4 +8,7 @@ import com.bi.salessaas.entity.Product;
 @LookupComponent("productsTable")
 @LoadDataBeforeShow
 public class ProductBrowse extends StandardLookup<Product> {
+
+
+
 }

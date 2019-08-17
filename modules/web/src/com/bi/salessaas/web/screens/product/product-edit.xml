@@ -19,17 +19,21 @@
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="scrollBox" spacing="true">
+    <layout expand="editActions" spacing="true">
         <scrollBox id="scrollBox" spacing="true">
             <form id="form" dataContainer="productDc">
-                <column width="250px">
+                <column width="280px">
                     <lookupField id="categoryLookupField" caption="Category"
                                  required="true" optionsContainer="categoriesDc" property="category"/>
                     <textField id="productCodeField" property="productCode" required="true"/>
                     <textField id="descriptionField" property="description"/>
                     <lookupField id="typeField" property="type"/>
-                    <textField id="baseRetailField" property="baseRetail"/>
+
+                </column>
+                <column width="280px">
                     <textField id="costField" property="cost" required="true"/>
+                    <textField id="baseRetailField" property="baseRetail"/>
+
                     <textField id="storagePriceField" property="storagePrice"/>
                     <textField id="installMHField" property="installMH"/>
                     <textField id="removalMHField" property="removalMH"/>

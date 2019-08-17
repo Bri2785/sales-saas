@@ -1,6 +1,7 @@
 package com.bi.salessaas.entity;
 
 import com.haulmont.addon.sdbmt.entity.StandardTenantEntity;
+import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.chile.core.annotations.NumberFormat;
 import com.haulmont.cuba.core.entity.annotation.Lookup;
@@ -32,60 +33,85 @@ public class OrderItem extends StandardTenantEntity {
 
     @NotNull
     @Column(name = "QUANTITY", nullable = false)
-    protected Double quantity;
+    protected Integer quantity = 1;
 
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @Column(name = "COST")
-    protected BigDecimal cost;
+    protected BigDecimal cost = BigDecimal.ZERO;
 
     @NotNull
+    @MetaProperty(datatype = "currency", mandatory = true)
     @Column(name = "RETAIL", nullable = false)
-    protected BigDecimal retail;
+    protected BigDecimal retail = BigDecimal.ZERO;
 
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @Column(name = "TOTAL_PRICE")
-    protected BigDecimal totalPrice;
+    protected BigDecimal totalPrice = BigDecimal.ZERO;
 
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @Column(name = "INSTALL_CHARGE")
-    protected BigDecimal installCharge;
+    protected BigDecimal installCharge = BigDecimal.ZERO;
 
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @Column(name = "REMOVAL_CHARGE")
-    protected BigDecimal removalCharge;
+    protected BigDecimal removalCharge = BigDecimal.ZERO;
 
-    @NumberFormat(pattern = "#.00")
+
     @Column(name = "INSTALL_MH")
-    protected Double installMH;
+    protected BigDecimal installMH = BigDecimal.ZERO;
 
     @NumberFormat(pattern = "#.00")
     @Column(name = "REMOVAL_MH")
-    protected Double removalMH;
+    protected BigDecimal removalMH = BigDecimal.ZERO;
 
-    @NumberFormat(pattern = "$#,##0.00")
+    @MetaProperty(datatype = "currency")
     @Column(name = "STORAGE")
-    protected BigDecimal storage;
+    protected BigDecimal storage = BigDecimal.ZERO;
 
     @Column(name = "NOTES", length = 1024)
     protected String notes;
 
     @Column(name = "USE_MH_FOR_CALC")
-    protected Boolean useMHForCalc;
+    protected Boolean useMHForCalc = true;
 
     @Column(name = "IS_ON_WORK_ORDER")
-    protected Boolean isOnWorkOrder;
+    protected Boolean isOnWorkOrder = true;
 
     @Column(name = "IS_ON_INVOICE")
-    protected Boolean isOnInvoice;
+    protected Boolean isOnInvoice = true;
 
     @Column(name = "STATUS")
     protected Integer status;
 
     @Column(name = "TAXABLE")
-    protected Boolean taxable;
+    protected Boolean taxable = true;
 
     @Column(name = "INVOICED_STATUS")
     protected Integer invoicedStatus;
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setInstallMH(BigDecimal installMH) {
+        this.installMH = installMH;
+    }
+
+    public BigDecimal getInstallMH() {
+        return installMH;
+    }
+
+    public void setRemovalMH(BigDecimal removalMH) {
+        this.removalMH = removalMH;
+    }
+
+    public BigDecimal getRemovalMH() {
+        return removalMH;
+    }
 
     public ItemInvoiceStatus getInvoicedStatus() {
         return invoicedStatus == null ? null : ItemInvoiceStatus.fromId(invoicedStatus);
@@ -175,22 +201,6 @@ public class OrderItem extends StandardTenantEntity {
         this.storage = storage;
     }
 
-    public Double getRemovalMH() {
-        return removalMH;
-    }
-
-    public void setRemovalMH(Double removalMH) {
-        this.removalMH = removalMH;
-    }
-
-    public Double getInstallMH() {
-        return installMH;
-    }
-
-    public void setInstallMH(Double installMH) {
-        this.installMH = installMH;
-    }
-
     public BigDecimal getRemovalCharge() {
         return removalCharge;
     }
@@ -213,14 +223,6 @@ public class OrderItem extends StandardTenantEntity {
 
     public void setCost(BigDecimal cost) {
         this.cost = cost;
-    }
-
-    public Double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Double quantity) {
-        this.quantity = quantity;
     }
 
     public Product getProduct() {

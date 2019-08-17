@@ -37,7 +37,7 @@
                 <column id="productCode"/>
                 <column id="description"/>
                 <column id="type"/>
-                <column id="cost"/>
+                <column id="baseRetail" caption="msg://productBaseRetail"/>
                 <column id="storagePrice"/>
                 <column id="installMH"/>
                 <column id="removalMH"/>

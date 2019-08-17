@@ -23,11 +23,11 @@ public class SalesPerson extends StandardTenantEntity {
     @Column(name = "TITLE")
     protected String title;
 
-    @Pattern(message = "{msg://SalesPersonInvalidPhone}", regexp = "(?:\\d{3}-){2}\\d{4}")
+    @Pattern(message = "{msg://SalesPersonInvalidPhone}", regexp = "(?:\\d{3}-?){2}\\d{4}")
     @Column(name = "CONTACT_NUMBER")
     protected String contactNumber;
 
-    @Email(message = "{msg://InvalidEmail}", regexp = "^[A-Z0-9+_.-]+@[A-Z0-9.-]+$")
+    @Email(message = "{msg://InvalidEmail}", regexp = "^[a-zA-Z0-9+_.-]+@[A-Za-z0-9.-]+$")
     @Column(name = "EMAIL_ADDRESS")
     protected String emailAddress;
 

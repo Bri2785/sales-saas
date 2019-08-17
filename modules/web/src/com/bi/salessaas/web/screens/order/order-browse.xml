@@ -6,7 +6,7 @@
     <data readOnly="true">
         <collection id="ordersDc"
                     class="com.bi.salessaas.entity.Order"
-                    view="_local">
+                    view="order-edit">
             <loader id="ordersDl">
                 <query>
                     <![CDATA[select e from salessaas_Order e]]>
@@ -32,13 +32,12 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="tenantId"/>
+                <column id="customer"/>
+                <column id="jobType" caption="msg://jobType"/>
                 <column id="orderType"/>
-                <column id="shippingRate"/>
-                <column id="discount"/>
-                <column id="notes"/>
                 <column id="status"/>
                 <column id="dateSold"/>
+                <column id="grandTotal" caption="msg://grandTotal"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"

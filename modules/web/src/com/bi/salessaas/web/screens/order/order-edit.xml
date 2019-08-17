@@ -10,31 +10,135 @@
             <loader/>
             <collection id="itemsDc" property="items"/>
         </instance>
+        <collection id="jobTypeDc" class="com.bi.salessaas.entity.JobType" view="_minimal">
+            <loader>
+                <query><![CDATA[select e from salessaas_JobType e ]]></query>
+            </loader>
+        </collection>
+        <collection id="seasonDc" class="com.bi.salessaas.entity.Year" view="_minimal">
+            <loader>
+                <query><![CDATA[select e from salessaas_Year e order by e.name asc ]]></query>
+            </loader>
+        </collection>
+        <collection id="salesPersonDc" class="com.bi.salessaas.entity.SalesPerson" view="_minimal">
+            <loader>
+                <query><![CDATA[select e from salessaas_SalesPerson e order by e.salesPersonName ]]></query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="orderDc">
-            <column width="250px">
-                <pickerField id="customerField" property="customer">
-                    <actions>
-                        <action id="lookup" type="picker_lookup"/>
-                    </actions>
-                </pickerField>
-                <lookupField id="orderTypeField" property="orderType"/>
-                <textField id="shippingRateField" property="shippingRate"/>
-                <textField id="discountField" property="discount"/>
+    <layout expand="itemsBox" spacing="true">
+        <tabSheet height="375px">
+            <tab id="generalTab" caption="msg://generalTab" margin="true,false,false,true">
+                <form id="form" dataContainer="orderDc">
 
-                <lookupField id="statusField" property="status"/>
-                <dateField id="dateSoldField" property="dateSold"/>
 
-            </column>
-            <column>
-                <textArea id="notesField" property="notes" responsive="true" resizableDirection="HORIZONTAL"/>
-            </column>
-        </form>
-        <groupBox id="itemsBox" caption="msg://com.bi.salessaas.entity/Order.items">
-            <table id="itemsTable" dataContainer="itemsDc" width="100%" height="200px">
+                    <column width="250px">
+                        <pickerField id="customerField" property="customer">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                            </actions>
+                        </pickerField>
+                        <lookupField id="jobTypeField" property="jobType" caption="msg://jobType"
+                                     optionsContainer="jobTypeDc"/>
+                        <lookupField id="seasonField" property="season" optionsContainer="seasonDc"/>
+                        <lookupField id="orderTypeField" property="orderType"/>
+
+                        <lookupField id="statusField" property="status"/>
+                        <lookupField id="salesPersonField" property="salesPerson" optionsContainer="salesPersonDc"/>
+                        <textField id="poNumberField" caption="msg://poNumber" property="poNumber"/>
+
+                        <textField id="shippingRateField" caption="msg://shippingRate" property="shippingRate"/>
+                        <textField id="discountPercentageField" caption="msg://discountPercent" property="discountPercent"/>
+
+
+
+                    </column>
+                    <column id="totalsColumn">
+<!--                        <groupBox id="servicesGroup" caption="msg://serviceGroup" width="AUTO" spacing="true">-->
+                        <hbox spacing="true" >
+                            <label value="msg://totalInstall" width="150px" align="MIDDLE_LEFT"/>
+                            <textField id="totalInstallField" dataContainer="orderDc" property="totalInstall"/>
+                            <button id="toggleOverrideInstall" icon="EXCHANGE" invoke="ontoggleOverrideInstallClick"  />
+                        </hbox>
+                        <hbox spacing="true">
+                            <label value="msg://totalRemoval" width="150px" align="MIDDLE_LEFT"/>
+                            <textField id="totalRemovalField" dataContainer="orderDc" property="totalRemoval" />
+                            <button id="toggleOverrideRemoval" icon="EXCHANGE"  invoke="ontoggleOverrideRemovalClick"/>
+                        </hbox>
+                        <hbox spacing="true">
+                            <label value="msg://totalStorage" width="150px" align="MIDDLE_LEFT"/>
+                            <textField id="totalStorageField" dataContainer="orderDc" property="totalStorage" />
+                            <button id="toggleOverrideStorage" icon="EXCHANGE"  invoke="ontoggleOverrideStorageClick"/>
+                        </hbox>
+<!--                        </groupBox>-->
+                        <hbox spacing="true">
+                            <label value="msg://totalProduct" width="150px" align="MIDDLE_LEFT"/>
+                            <textField id="totalProductField" editable="false" dataContainer="orderDc" property="totalProduct" />
+                        </hbox>
+<!--                        -->
+
+                        <hbox spacing="true">
+                            <label value="msg://shippingAmount" width="150px"  align="MIDDLE_LEFT"/>
+
+                            <textField id="shippingAmountField" dataContainer="orderDc" property="shippingAmount"/>
+                        </hbox>
+                        <hbox spacing="true">
+                            <label value="msg://discountLabel" width="150px"  align="MIDDLE_LEFT"/>
+
+                            <textField id="discountField" dataContainer="orderDc" property="discount"/>
+                        </hbox>
+
+                    <label/>
+                        <hbox spacing="true">
+                            <label value="msg://totalTax" width="150px" align="MIDDLE_LEFT"/>
+                            <textField id="totalTaxField" editable="false" dataContainer="orderDc" property="totalTax" />
+                        </hbox>
+                        <hbox spacing="true">
+                            <label value="msg://grandTotal" width="150px" css="color: blue;" align="MIDDLE_LEFT"/>
+                            <textField id="grandTotalField" editable="false" dataContainer="orderDc" property="grandTotal" />
+                        </hbox>
+
+
+
+
+
+                    </column>
+                    <column>
+                        <dateField id="dateEnteredField" editable="false" property="dateEntered" />
+                        <dateField id="dateSoldField" property="dateSold" enable="false"/>
+
+
+                        <label/>
+                        <label/>
+                        <label/>
+
+                    </column>
+
+                </form>
+
+            </tab>
+            <tab id="instructionsTab" caption="msg://instructionsTab" margin="true,false,false,true">
+                <form id="form2" dataContainer="orderDc">
+                    <column>
+                        <textArea id="notesField" property="notes" responsive="true" resizableDirection="HORIZONTAL"
+                                  rows="5" width="100%"/>
+                        <textArea id="drivingDirections" property="drivingDirections" responsive="true" resizableDirection="BOTH" height="110px"/>
+
+
+
+                    </column>
+                    <column>
+                        <textArea id="installInstructions" property="installInstructions" responsive="true" resizableDirection="BOTH" height="110px"/>
+                        <textArea id="removalInstructions" property="removalInstructions" responsive="true" resizableDirection="BOTH" height="110px"/>
+                    </column>
+                </form>
+
+            </tab>
+        </tabSheet>
+        <groupBox id="itemsBox" caption="msg://com.bi.salessaas.entity/Order.items" height="250px">
+            <table id="itemsTable" dataContainer="itemsDc" width="100%" height="100%">
                 <actions>
                     <action id="create" type="create"/>
                     <action id="edit" type="edit"/>
