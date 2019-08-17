@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.bi.salessaas.web.screens.product">
+    <data>
+        <instance id="productDc"
+                  class="com.bi.salessaas.entity.Product"
+                  view="product-view-with-category">
+            <loader/>
+        </instance>
+        <collection id="categoriesDc" class="com.bi.salessaas.entity.Category" view="_minimal">
+            <loader id="categoriesLc">
+                <query>
+                    <![CDATA[select e from salessaas_Category e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="productDc">
+                <column width="250px">
+                    <lookupField id="categoryLookupField" caption="Category"
+                                 required="true" optionsContainer="categoriesDc" property="category"/>
+                    <textField id="productCodeField" property="productCode" required="true"/>
+                    <textField id="descriptionField" property="description"/>
+                    <lookupField id="typeField" property="type"/>
+                    <textField id="baseRetailField" property="baseRetail"/>
+                    <textField id="costField" property="cost" required="true"/>
+                    <textField id="storagePriceField" property="storagePrice"/>
+                    <textField id="installMHField" property="installMH"/>
+                    <textField id="removalMHField" property="removalMH"/>
+                    <textField id="installChargeField" property="installCharge"/>
+                    <textField id="removalChargeField" property="removalCharge"/>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

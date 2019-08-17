@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-salessaas" insertBefore="administration">
+        <item screen="salessaas_Product.browse"/>
+        <item screen="salessaas_SalesPerson.browse"/>
+        <item screen="salessaas_Order.browse"/>
+        <item screen="salessaas_Category.browse"/>
+        <item screen="salessaas_Year.browse"/>
+        <item screen="salessaas_Customer.browse"/>
+        <item screen="salessaas_Company.edit" id="salessaas_Company.edit"/>
     </menu>
 </menu-config>

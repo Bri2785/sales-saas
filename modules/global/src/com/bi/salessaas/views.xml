@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
+    <view entity="salessaas_OrderItem" name="orderItem-with-product" extends="_local">
+        <property name="product" view="_minimal">
+            <property name="baseRetail"/>
+        </property>
+    </view>
+    <view entity="salessaas_Order" name="order-edit" extends="_local">
+        <property name="customer" view="_minimal"/>
+        <property name="items" view="orderItem-with-product"/>
+    </view>
+    <view entity="salessaas_Product" name="product-view-with-category" extends="_local">
+        <property name="category" view="_minimal"/>
+    </view>
+    <view entity="salessaas_Customer" name="customer-view-with-orders" extends="_local">
+        <property name="orders" view="_minimal"/>
+    </view>
+    <view entity="salessaas_Company" name="company-view-with-logo" extends="_local">
+        <property name="logoFile" view="_minimal"/>
+    </view>
 </views>

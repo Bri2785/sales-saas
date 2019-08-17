@@ -1,0 +1,16 @@
+alter table SALESSAAS_CUSTOMER add column JOB_CITY varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column WORK_PHONE varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column NOTES varchar(1024) ;
+alter table SALESSAAS_CUSTOMER add column REFERRED_BY varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column CONTACT_PHONE varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column FAX varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column JOB_ZIP varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column CONTACT varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column JOB_STATE varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column JOB_ADDRESS2 varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column HOME_PHONE varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column CELL_PHONE varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column EMAIL varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column TAX_RATE double precision ;
+alter table SALESSAAS_CUSTOMER add column JOB_ADDRESS1 varchar(255) ;
+alter table SALESSAAS_CUSTOMER add column JOB_ADDRESS3 varchar(255) ;

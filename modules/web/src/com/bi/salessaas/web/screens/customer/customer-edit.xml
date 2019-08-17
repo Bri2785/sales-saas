@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="customerForm"
+        messagesPack="com.bi.salessaas.web.screens.customer">
+    <data>
+        <instance id="customerDc"
+                  class="com.bi.salessaas.entity.Customer"
+                  view="customer-view-with-orders">
+            <loader/>
+            <collection id="ordersDc" property="orders"/>
+        </instance>
+    </data>
+    <actions>
+        <action id="copyBillingAddressInfo"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <tabSheet height="350px">
+                <tab id="customInfoTab" caption="msg://customerData" margin="true,false,false,true" spacing="true"
+                     expand="customerForm">
+                    <form id="customerForm" dataContainer="customerDc">
+                        <column width="250px">
+                            <textField id="firstNameField" property="firstName"/>
+                            <textField id="lastNameField" property="lastName"/>
+                            <textField id="companyField" property="company"/>
+                            <label/>
+                            <textField id="contact" property="contact" required="true"/>
+                            <textField id="contactPhone" property="contactPhone" required="true"/>
+                            <textField id="contactEmail" property="email"/>
+                        </column>
+                    <column>
+                        <textField id="billAddressField" property="billAddress"/>
+                        <textField id="billAddress2Field" property="billAddress2"/>
+                        <textField id="billCityField" property="billCity"/>
+                        <textField id="billStateField" property="billState"/>
+                        <textField id="billZipField" property="billZip"/>
+
+                    </column>
+                        <column>
+                            <lookupField id="termsField" property="terms"/>
+                            <textField id="workPhoneField" property="workPhone"/>
+                            <textField id="homePhoneField" property="homePhone"/>
+                            <textField id="cellPhoneField" property="cellPhone"/>
+                            <textField id="taxRateField" property="taxRate"/>
+                            <label/>
+                            <textArea id="notesField" property="notes" resizableDirection="BOTH" width="250px"/>
+
+
+                        </column>
+
+                    </form>
+                </tab>
+                <tab id="jobSiteTab" caption="Job Site Info" margin="true,false,false,true" spacing="true">
+
+                    <form id="customerJobForm" dataContainer="customerDc">
+                        <column width="250px">
+                            <textField id="jobAddress" property="jobAddress1"/>
+                            <textField id="jobAddress2" property="jobAddress2"/>
+                            <textField id="jobAddress3" property="jobAddress3"/>
+                            <textField id="jobCity" property="jobCity"/>
+                            <textField id="jobState" property="jobState"/>
+                            <textField id="jobZip" property="jobZip"/>
+                            <button id="btnCopyBillAddress" action="copyBillingAddressInfo"
+                                    caption="Copy Billing Information" responsive="true"/>
+                        </column>
+
+                    </form>
+
+                </tab>
+
+
+            </tabSheet>
+            <groupBox id="ordersBox" caption="msg://com.bi.salessaas.entity/Customer.orders">
+                <table id="ordersTable" dataContainer="ordersDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="customer"/>
+                        <column id="season"/>
+                        <column id="orderType"/>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="ordersTable.create"/>
+                        <button action="ordersTable.edit"/>
+                        <button action="ordersTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

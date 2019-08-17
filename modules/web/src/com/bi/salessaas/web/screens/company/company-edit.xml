@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.bi.salessaas.web.screens.company">
+    <data>
+        <instance id="companyDc"
+                  class="com.bi.salessaas.entity.Company"
+                  view="company-view-with-logo">
+            <loader id="companyDl">
+                <query><![CDATA[select e from salessaas_Company e
+where e.tenantId = :tenantId]]></query>
+            </loader>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <grid id="gridInfo" margin="true,true,false,true" width="100%">
+                <columns count="3"/>
+                <rows>
+                    <row>
+                        <form id="form" dataContainer="companyDc">
+                        <column width="250px">
+                            <textField id="nameField" property="name"/>
+
+                            <textField id="address1Field" property="address1" caption="msg://customerAddress1"/>
+                            <textField id="address2Field" property="address2" caption="msg://customerAddress2"/>
+                            <textField id="address3Field" property="address3" caption="msg://customerAddress3"/>
+                            <textField id="cityField" property="city"/>
+                            <textField id="stateField" property="state"/>
+                            <textField id="zipField" property="zip"/>
+                            <textField id="phoneField" property="phone"/>
+                            <textField id="faxField" property="fax"/>
+                            <textField id="websiteField" property="website" caption="msg://website"/>
+                            <textField id="taxrateField" property="taxrate" caption="msg://taxRate"/>
+                            <checkBox id="isTaxOverridenByCustomerField" property="isTaxOverridenByCustomer"
+                                      caption="Customers Override Tax Rate"/>
+                        </column>
+                    </form>
+                        <vbox height="AUTO" width="300px" margin="false,true,false,true">
+                            <textArea id="proposalAcceptanceTermsField" property="proposalAcceptanceTerms" height="250px"
+                                      caption="Acceptance Terms" width="100%"/>
+                        </vbox>
+
+                        <form>
+                            <column>
+                                <groupBox caption="Logo" spacing="true"
+                                          height="300px" width="300px" expand="image">
+                                    <image id="image"
+                                           width="100%"
+                                           align="MIDDLE_CENTER"
+                                           scaleMode="CONTAIN"/>
+                                    <hbox align="BOTTOM_LEFT"
+                                          spacing="true">
+                                        <upload id="uploadField"/>
+                                        <button id="clearImageBtn"
+                                                caption="Clear"
+                                                invoke="onClearImageBtnClick"/>
+                                    </hbox>
+                                </groupBox>
+                            </column>
+                        </form>
+                    </row>
+<!--                    <row>-->
+<!--                        <textArea id="proposalAcceptanceTermsField" property="proposalAcceptanceTerms" width="100%" resizable="true" resizableDirection="HORIZONTAL" colspan="2"/>-->
+<!--                    </row>-->
+                </rows>
+            </grid>
+
+</scrollBox>
+
+        <hbox id="editActions" spacing="true">
+            <button id="windowCommitAndCloseButton" action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

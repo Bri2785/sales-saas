@@ -1,0 +1,25 @@
+alter table SALESSAAS_ORDER add column DATE_ENTERED timestamp ;
+ alter table SALESSAAS_ORDER add column SEASON_ID varchar(36) ^
+ update SALESSAAS_ORDER set SEASON_ID = 1 ;
+ alter table SALESSAAS_ORDER alter column SEASON_ID set not null ;
+-- alter table SALESSAAS_ORDER add column SEASON_ID varchar(36) not null ;
+alter table SALESSAAS_ORDER add column IS_INSTALLED boolean ;
+alter table SALESSAAS_ORDER add column INSTALL_INSTRUCTIONS varchar(1024) ;
+alter table SALESSAAS_ORDER add column REMOVAL_INSTRUCTIONS varchar(1024) ;
+alter table SALESSAAS_ORDER add column DRIVING_DIRECTIONS varchar(1024) ;
+alter table SALESSAAS_ORDER add column INSTALL_DATE timestamp ;
+alter table SALESSAAS_ORDER add column OVERRIDE_STORAGE boolean ;
+alter table SALESSAAS_ORDER add column IS_INSTALL_TAXABLE boolean ;
+alter table SALESSAAS_ORDER add column IS_REMOVAL_TAXABLE boolean ;
+alter table SALESSAAS_ORDER add column SOURCE_ID varchar(36) ;
+alter table SALESSAAS_ORDER add column IS_DISCOUNTED boolean ;
+alter table SALESSAAS_ORDER add column USE_REMOVAL_PERCENT boolean ;
+alter table SALESSAAS_ORDER add column OVERRIDE_REMOVAL boolean ;
+alter table SALESSAAS_ORDER add column TOTAL_STORAGE decimal(19, 2) ;
+alter table SALESSAAS_ORDER add column PO_NUMBER varchar(255) ;
+alter table SALESSAAS_ORDER add column IS_REMOVED boolean ;
+alter table SALESSAAS_ORDER add column TOTAL_REMOVAL decimal(19, 2) ;
+alter table SALESSAAS_ORDER add column TOTAL_INSTALL decimal(19, 2) ;
+alter table SALESSAAS_ORDER add column REMOVAL_DATE timestamp ;
+alter table SALESSAAS_ORDER add column OVERRIDE_INSTALL boolean ;
+alter table SALESSAAS_ORDER add column IS_STORAGE_TAXABLE boolean ;
