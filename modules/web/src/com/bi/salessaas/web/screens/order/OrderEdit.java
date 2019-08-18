@@ -54,6 +54,7 @@ public class OrderEdit extends StandardEditor<Order> {
 
 
 
+
     @Subscribe(id = "itemsDc", target = Target.DATA_CONTAINER)
     private void onItemsDcCollectionChange(CollectionContainer.CollectionChangeEvent<OrderItem> event) {
         if (event.getChangeType() != CollectionChangeType.REFRESH) {
@@ -63,8 +64,12 @@ public class OrderEdit extends StandardEditor<Order> {
 
     @Subscribe(id = "itemsDc", target = Target.DATA_CONTAINER)
     private void onItemsDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<OrderItem> event) {
-
+        if (event.getProperty().equals("quantity") || event.getProperty().equals("retail")) {
+            event.getItem().setTotalPrice(event.getItem().getRetail().multiply(new BigDecimal(event.getItem().getQuantity())));
+            recalculateTotals();
+        }
     }
+
 
     @Subscribe(id = "orderDc", target = Target.DATA_CONTAINER)
     private void onOrderDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<Order> event) {
@@ -351,17 +356,26 @@ public class OrderEdit extends StandardEditor<Order> {
         Boolean currentOverride =  orderDc.getItem().getOverrideInstall();
         orderDc.getItem().setOverrideInstall(!currentOverride);
         updateInstallField(!currentOverride);
+        if (currentOverride){
+            recalculateTotals(); //went back to auto-calc mode
+        }
     }
 
     public void ontoggleOverrideRemovalClick() {
         Boolean currentOverride =  orderDc.getItem().getOverrideRemoval();
         orderDc.getItem().setOverrideRemoval(!currentOverride);
         updateRemovalField(!currentOverride);
+        if (currentOverride){
+            recalculateTotals(); //went back to auto-calc mode
+        }
     }
 
     public void ontoggleOverrideStorageClick() {
         Boolean currentOverride =  orderDc.getItem().getOverrideStorage();
         orderDc.getItem().setOverrideStorage(!currentOverride);
         updateStorageField(!currentOverride);
+        if (currentOverride){
+            recalculateTotals(); //went back to auto-calc mode
+        }
     }
 }
