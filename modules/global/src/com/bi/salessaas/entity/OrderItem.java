@@ -49,6 +49,14 @@ public class OrderItem extends StandardTenantEntity {
     protected BigDecimal totalPrice = BigDecimal.ZERO;
 
     @MetaProperty(datatype = "currency")
+    @Column(name = "TOTAL_INSTALL_CHARGE")
+    protected BigDecimal totalInstallCharge = BigDecimal.ZERO;
+
+    @MetaProperty(datatype = "currency")
+    @Column(name = "TOTAL_REMOVAL_CHARGE")
+    protected BigDecimal totalRemovalCharge = BigDecimal.ZERO;
+
+    @MetaProperty(datatype = "currency")
     @Column(name = "INSTALL_CHARGE")
     protected BigDecimal installCharge = BigDecimal.ZERO;
 
@@ -88,6 +96,22 @@ public class OrderItem extends StandardTenantEntity {
 
     @Column(name = "INVOICED_STATUS")
     protected Integer invoicedStatus;
+
+    public BigDecimal getTotalRemovalCharge() {
+        return totalRemovalCharge;
+    }
+
+    public void setTotalRemovalCharge(BigDecimal totalRemovalCharge) {
+        this.totalRemovalCharge = totalRemovalCharge;
+    }
+
+    public BigDecimal getTotalInstallCharge() {
+        return totalInstallCharge;
+    }
+
+    public void setTotalInstallCharge(BigDecimal totalInstallCharge) {
+        this.totalInstallCharge = totalInstallCharge;
+    }
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;

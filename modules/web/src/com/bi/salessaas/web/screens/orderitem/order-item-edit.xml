@@ -13,32 +13,72 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="scrollBox" spacing="true">
-        <scrollBox id="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true" margin="true,false,false,true">
             <form id="form" dataContainer="orderItemDc">
-                <column width="400px" childrenCaptionWidth="180px">
+                <column width="400px" childrenCaptionWidth="150px">
                     <pickerField id="productField" property="product">
                         <actions>
                             <action id="lookup" type="picker_lookup"/>
                         </actions>
                     </pickerField>
-                    <lookupField id="invoiceStatusField" property="invoicedStatus" caption="msg://itemInvoicedStatus"/>
+                    <lookupField id="statusField" property="status"/>
                     <label/>
                     <textField id="quantityField" property="quantity"/>
                     <label/>
-                    <textField id="costField" property="cost" />
+
                     <textField id="retailField" property="retail"/>
-                    <textField id="totalPriceField" property="totalPrice" editable="false"/>
-                    <textField id="installChargeField" property="installCharge"/>
-                    <textField id="removalChargeField" property="removalCharge"/>
-                    <textField id="installMHField" property="installMH"/>
-                    <textField id="removalMHField" property="removalMH"/>
-                    <textField id="storageField" property="storage"/>
-                    <textField id="notesField" property="notes"/>
-                    <checkBox id="useMHForCalcField" property="useMHForCalc" caption="msg://useMHforCalc"/>
+                    <textField id="totalPriceField" property="totalPrice" editable="false" caption="msg://totalProductPrice"/>
+
+                    <groupBox id="chargesBox" caption="Charges" width="100%" >
+                    <hbox spacing="true">
+                        <label value="Install Charge" align="MIDDLE_LEFT" width="140"/>
+                        <textField id="installChargeField" dataContainer="orderItemDc" property="installCharge" width="190"/>
+                        <label id="lblTotalInstallCharge" value="$0.00" align="MIDDLE_RIGHT" css="color: blue; text-align: right;" width="70"/>
+                    </hbox>
+                    <hbox spacing="true">
+                        <label value="Removal Charge" align="MIDDLE_LEFT" width="140"/>
+                        <textField id="removalChargeField" dataContainer="orderItemDc" property="removalCharge" width="190"/>
+                        <label id="lblTotalRemovalCharge" value="$0.00" align="MIDDLE_RIGHT" css="color: blue; text-align: right;" width="70"/>
+                    </hbox>
+                    <hbox spacing="true">
+                        <label value="Storage Charge" align="MIDDLE_LEFT" width="140"/>
+                        <textField id="storageField" dataContainer="orderItemDc" property="storage" width="190"/>
+                        <label id="lblTotalStorageCharge" value="$0.00" align="MIDDLE_RIGHT" css="color: blue; text-align: right;" width="70"/>
+                    </hbox>
+
+                    <label/>
+
+                    <hbox spacing="true">
+                        <label value="msg://installMH" align="MIDDLE_LEFT" width="140"/>
+                        <textField id="installMHField" dataContainer="orderItemDc" property="installMH" width="190"/>
+                        <label width="AUTO" id="jobTypeLabel" css="color: blue; text-align: right;"/>
+                    </hbox>
+                    <hbox spacing="true">
+                        <label value="msg://removalMH" align="MIDDLE_LEFT" width="140"/>
+                        <textField id="removalMHField" dataContainer="orderItemDc" property="removalMH" width="190" />
+
+
+                    </hbox>
+                        <label/>
+                        <checkBox id="useMHForCalcField" dataContainer="orderItemDc" property="useMHForCalc" caption="msg://useMHforCalc"/>
+                    </groupBox>
+
+
+
+
+                    <resizableTextArea id="notesField" property="notes" resizableDirection="HORIZONTAL"/>
+
+                </column>
+                <column width="400px" childrenCaptionWidth="180px">
+                    <lookupField id="invoiceStatusField" property="invoicedStatus" editable="false" caption="msg://itemInvoicedStatus"/>
+                    <label/>
+                    <textField id="costField" property="cost" />
                     <checkBox id="isOnWorkOrderField" property="isOnWorkOrder"/>
                     <checkBox id="isOnInvoiceField" property="isOnInvoice"/>
-                    <lookupField id="statusField" property="status"/>
+
                     <checkBox id="taxableField" property="taxable"/>
+
+
 
                 </column>
             </form>

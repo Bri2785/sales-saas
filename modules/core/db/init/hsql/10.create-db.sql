@@ -168,6 +168,8 @@ create table SALESSAAS_ORDER_ITEM (
     COST decimal,
     RETAIL decimal not null,
     TOTAL_PRICE decimal,
+    TOTAL_INSTALL_CHARGE decimal,
+    TOTAL_REMOVAL_CHARGE decimal,
     INSTALL_CHARGE decimal,
     REMOVAL_CHARGE decimal,
     INSTALL_MH decimal(19, 2),

@@ -10,7 +10,7 @@
             <loader/>
             <collection id="itemsDc" property="items"/>
         </instance>
-        <collection id="jobTypeDc" class="com.bi.salessaas.entity.JobType" view="_minimal">
+        <collection id="jobTypeDc" class="com.bi.salessaas.entity.JobType" view="_local">
             <loader>
                 <query><![CDATA[select e from salessaas_JobType e ]]></query>
             </loader>
@@ -82,7 +82,7 @@
                         <hbox spacing="true">
                             <label value="msg://shippingAmount" width="150px"  align="MIDDLE_LEFT"/>
 
-                            <textField id="shippingAmountField" dataContainer="orderDc" property="shippingAmount"/>
+                            <textField id="shippingAmountField" dataContainer="orderDc" property="shippingAmount" editable="false"/>
                         </hbox>
                         <hbox spacing="true">
                             <label value="msg://discountLabel" width="150px"  align="MIDDLE_LEFT"/>
@@ -149,6 +149,8 @@
                     <column id="quantity" editable="true"/>
                     <column id="retail" editable="true"/>
                     <column id="totalPrice"/>
+                    <column id="totalInstallCharge"/>
+                    <column id="totalRemovalCharge"/>
                     <column id="notes" editable="true"/>
                 </columns>
                 <buttonsPanel>

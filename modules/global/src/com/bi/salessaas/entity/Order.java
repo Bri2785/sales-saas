@@ -124,7 +124,7 @@ public class Order extends StandardTenantEntity {
 
     @MetaProperty(datatype = "currency")
     @Column(name = "TOTAL_TAX")
-    protected BigDecimal totalTax;
+    protected BigDecimal totalTax = BigDecimal.ZERO;
 
     @MetaProperty(datatype = "currency")
     @Column(name = "GRAND_TOTAL")

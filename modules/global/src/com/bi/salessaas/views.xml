@@ -8,7 +8,10 @@
     </view>
     <view entity="salessaas_Order" name="order-edit" extends="_local">
         <property name="customer" view="_minimal"/>
-        <property name="jobType" view="_minimal"/>
+        <property name="jobType" view="_minimal">
+            <property name="hourlyWage"/>
+            <property name="markup"/>
+        </property>
         <property name="season" view="_minimal"/>
         <property name="salesPerson" view="_minimal"/>
         <property name="items" view="orderItem-with-product"/>
