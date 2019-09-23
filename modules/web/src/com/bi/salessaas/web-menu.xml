@@ -6,8 +6,9 @@
         <item screen="salessaas_Order.browse"/>
         <item screen="salessaas_SalesPerson.browse"/>
         <item screen="salessaas_JobType.browse"/>
-        <item screen="salessaas_Company.edit"/>
         <item screen="salessaas_Year.browse"/>
         <item screen="salessaas_Category.browse"/>
+        <item screen="salessaas_Company.browse"/>
+        <item screen="salessaas_Company.edit"/>
     </menu>
 </menu-config>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://caption"
+        messagesPack="com.bi.salessaas.web.screens.estimateviewer">
+    <layout>
+        <browserFrame id="browserFrame" width="100%" height="100%">
+
+        </browserFrame>
+    </layout>
+</window>

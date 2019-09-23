@@ -23,6 +23,10 @@
         <property name="orders" view="_minimal"/>
     </view>
     <view entity="salessaas_Company" name="company-view-with-logo" extends="_local">
-        <property name="logoFile" view="_minimal"/>
+        <property name="logoFile" view="_minimal">
+            <property name="extension"/>
+            <property name="size"/>
+            <property name="createDate"/>
+        </property>
     </view>
 </views>
